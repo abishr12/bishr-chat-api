@@ -26,7 +26,7 @@ console.log(`Started on port ${config.port}`);
 // Setup socket.io
 socketIo.on("connection", socket => {
   const username = socket.handshake.query.username;
-  //console.log(`${username} connected`);
+  console.log(`${username} connected`);
 
   socket.on("client:message", data => {
     console.log("hey there");
@@ -38,7 +38,7 @@ socketIo.on("connection", socket => {
   socket.on("client:typing", data => {
     console.log(`${data.message}`);
     // typing received from client, now broadcast it to everyone else
-    socket.broadcast.emit("server:typing", data);
+    socket.broadcast.emit("server:typing", data.message);
   });
 
   socket.on("disconnect", () => {
