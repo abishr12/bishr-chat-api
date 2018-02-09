@@ -30,11 +30,13 @@ socketIo.on("connection", socket => {
 
   socket.on("client:message", data => {
     console.log("hey there");
-    //console.log(`${data.username}: ${data.message} here in the sames`);
+    //console.log(`${data.username}: ${data.message}`);
 
     // message received from client, now broadcast it to everyone else
     socket.broadcast.emit("server:message", data);
   });
+
+  //Send data when user is typing
   socket.on("client:typing", data => {
     console.log(`${data.message}`);
     // typing received from client, now broadcast it to everyone else
